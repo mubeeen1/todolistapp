@@ -1,1 +1,1 @@
-web: npm  run mongodb:initt
+web: npm init
