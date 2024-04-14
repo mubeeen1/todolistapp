@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const ejs = require("ejs");
 const app = express();
 const _= require("lodash");
+const port= process.env.PORT || 3000;
 app.set("view engine", "ejs");
 
 mongoose.connect("mongodb+srv://mubeen:todolistpwd@todolist.jucyib1.mongodb.net/todolistDB");
@@ -112,8 +113,8 @@ app.get("/work", function (req, res) {
     res.render("list", { listHeading: "Work List", listItem: workItems });
 })
 
-app.listen(3000, function () {
-    console.log("server is started and running on port 3000");
+app.listen(port, function () {
+    console.log("server is started and running on port"+ port);
 });
 app.get("/about", function (req, res) {
     res.render("about");
