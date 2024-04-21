@@ -1,2 +1,1 @@
-web: npm ci "--production=false",
-web: node app.js
+web: sh -c " npm i && node app.js"
