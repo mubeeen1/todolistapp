@@ -22,7 +22,7 @@ const item3 = new Item({
     name: "<--- Hit this to delete an item",
 });
 const item4= new Item({
-    name: "Rui ki gudiya",
+    name: " MA SHA ALLAH 💖 ",
 })
 const defaultArray = [item1, item2, item3, item4];
 const listSchema = {
