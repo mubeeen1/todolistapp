@@ -21,7 +21,10 @@ const item2 = new Item({
 const item3 = new Item({
     name: "<--- Hit this to delete an item",
 });
-const defaultArray = [item1, item2, item3];
+const item4= new Item({
+    name: "Rui ki gudiya",
+})
+const defaultArray = [item1, item2, item3, item4];
 const listSchema = {
     name: String,
     items: [itemSchema],
@@ -32,20 +35,19 @@ const List = mongoose.model("List", listSchema);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-app.get("/", function (req, res) {
-    Item.find({}).then(items => {
+app.get("/", async (req, res) => {
+    try {
+        const items = await Item.find({});
         if (items.length === 0) {
-            Item.insertMany(defaultArray).then(() => { console.log("Succesfuly added the items into default array") })
-                .catch(err => {
-                    console.log(err)
-                }
-                )
-            res.redirect("/")
-        }
-        else {
+            await Item.insertMany(defaultArray);
+            res.redirect("/");
+        } else {
             res.render("list", { listHeading: "Today", listItem: items });
         }
-    });
+    } catch (err) {
+        console.log("Error fetching items: ", err);
+        res.status(500).send("Internal Server Error");
+    }
 });
 app.get("/:customListName", function (req, res) {
     const customListName = _.capitalize(req.params.customListName);
